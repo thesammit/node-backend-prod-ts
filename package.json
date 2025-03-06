@@ -6,15 +6,15 @@
     "dev": "nodemon src/server.ts",
     "start": "node dist/server.js",
     "build": "tsc",
-    "lint": "eslint src --ext .ts",
-    "lint:fix": "eslint src --ext .ts --fix",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "prepare": "husky"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "lint-staged": {
-    "*.{ts,js}": [
+    "**/*.{ts,js}": [
       "pnpm lint:fix"
     ]
   },
