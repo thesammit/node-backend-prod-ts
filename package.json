@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "lint-staged": {
-    "src/**/*.{ts,js}": [
+    "*.{ts,js}": [
       "pnpm lint:fix"
     ]
   },
