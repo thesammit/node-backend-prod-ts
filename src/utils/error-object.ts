@@ -36,8 +36,8 @@ export default (errorData: {
     });
 
     if (config.env === EApplicationEnvironment.PRODUCTION) {
-        errorResponse.request.ip = null;
-        errorResponse.trace = null;
+        errorResponse.request.ip = undefined;
+        errorResponse.trace = undefined;
     }
 
     return errorResponse;
