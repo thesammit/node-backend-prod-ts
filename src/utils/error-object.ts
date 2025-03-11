@@ -1,20 +1,20 @@
-import { Request } from 'express'
-import { ERROR_MESSAGE } from '../constant/response-message'
-import { IHttpError } from '../types/types'
-import config from '../config/config'
-import { EApplicationEnvironment } from '../constant/application'
+import { Request } from 'express';
+import { ERROR_MESSAGE } from '../constant/response-message';
+import { IHttpError } from '../types/types';
+import config from '../config/config';
+import { EApplicationEnvironment } from '../constant/application';
 
 export default (errorData: {
     // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-    err: Error | unknown
-    req: Request
-    errorStatusCode: number
-    message?: string
+    err: Error | unknown;
+    req: Request;
+    errorStatusCode: number;
+    message?: string;
 }): IHttpError => {
-    const { err, req, errorStatusCode = 500, message } = errorData
-    let errorMessage = ''
+    const { err, req, errorStatusCode = 500, message } = errorData;
+    let errorMessage = '';
     if (err instanceof Error) {
-        errorMessage = err.message
+        errorMessage = err.message;
     }
     const errorResponse: IHttpError = {
         success: false,
@@ -27,18 +27,18 @@ export default (errorData: {
             method: req.method
         },
         trace: err instanceof Error ? { error: err.stack } : null
-    }
+    };
 
     // log the response
     // eslint-disable-next-line no-console
     console.error('Controller Error', {
         meta: errorResponse
-    })
+    });
 
     if (config.env === EApplicationEnvironment.PRODUCTION) {
-        errorResponse.request.ip = null
-        errorResponse.trace = null
+        errorResponse.request.ip = null;
+        errorResponse.trace = null;
     }
 
-    return errorResponse
-}
+    return errorResponse;
+};

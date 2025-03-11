@@ -1,4 +1,4 @@
 {
     "ext": ".ts",
-    "ignore": ["*.test.ts", "tests", "node_modules"]
+    "ignore": ["*.test.ts", "tests", "dist", "node_modules"]
 }

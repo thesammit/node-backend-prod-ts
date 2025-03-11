@@ -1,8 +1,8 @@
-import dotenvFlow from 'dotenv-flow'
-import { env } from 'process'
-import { EApplicationEnvironment } from '../constant/application'
+import dotenvFlow from 'dotenv-flow';
+import { env } from 'process';
+import { EApplicationEnvironment } from '../constant/application';
 
-dotenvFlow.config()
+dotenvFlow.config();
 
 export default {
     env: (env.NODE_ENV as EApplicationEnvironment) || EApplicationEnvironment.DEVELOPMENT,
@@ -18,4 +18,4 @@ export default {
         user: env.DB_USER,
         password: env.DB_PASSWORD
     }
-}
+};

@@ -1,9 +1,9 @@
-import { Request, Response } from 'express'
-import config from '../config/config'
-import { EApplicationEnvironment } from '../constant/application'
+import { Request, Response } from 'express';
+import config from '../config/config';
+import { EApplicationEnvironment } from '../constant/application';
 
 export default (responseData: { req: Request; res: Response; responseCode: number; data?: unknown; message: string }): void => {
-    const { req, res, responseCode, data, message } = responseData
+    const { req, res, responseCode, data, message } = responseData;
     const response = {
         success: true,
         statusCode: responseCode,
@@ -14,7 +14,7 @@ export default (responseData: { req: Request; res: Response; responseCode: numbe
             url: req.url,
             method: req.method
         }
-    }
+    };
 
     // log the response
     // eslint-disable-next-line no-console
@@ -22,11 +22,11 @@ export default (responseData: { req: Request; res: Response; responseCode: numbe
         meta: {
             response
         }
-    })
+    });
 
     if (config.env === EApplicationEnvironment.PRODUCTION) {
-        response.request.ip = null
+        response.request.ip = null;
     }
 
-    res.status(responseCode).json(response)
-}
+    res.status(responseCode).json(response);
+};
