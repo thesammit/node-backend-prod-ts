@@ -3,6 +3,7 @@ import { ERROR_MESSAGE } from '../constant/response-message';
 import { IHttpError } from '../types/types';
 import config from '../config/config';
 import { EApplicationEnvironment } from '../constant/application';
+import logger from './logger';
 
 export default (errorData: {
     // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
@@ -23,15 +24,14 @@ export default (errorData: {
         data: null,
         request: {
             ip: req.ip || null,
-            url: req.url,
+            url: req.originalUrl,
             method: req.method
         },
         trace: err instanceof Error ? { error: err.stack } : null
     };
 
     // log the response
-    // eslint-disable-next-line no-console
-    console.error('Controller Error', {
+    logger.error('CONTROLLER_ERROR', {
         meta: errorResponse
     });
 

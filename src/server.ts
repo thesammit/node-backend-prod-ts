@@ -1,19 +1,21 @@
-/* eslint-disable no-console */
 import config from './config/config';
 import app from './app';
+import logger from './utils/logger';
 
 const server = app.listen(config.port);
 
 (() => {
     try {
-        console.info(`Application started`, {
+        //database connection
+
+        logger.info(`APPLICATION_STARTED`, {
             meta: {
                 port: config.port,
                 serverUrl: config.serverUrl
             }
         });
     } catch (error) {
-        console.error(`Application failed to start`, {
+        logger.error(`APPLICATION_ERROR`, {
             meta: {
                 port: config.port,
                 serverUrl: config.serverUrl
@@ -22,7 +24,7 @@ const server = app.listen(config.port);
         });
 
         server.close(() => {
-            console.info(`Server closed`, {
+            logger.info(`SERVER_CLOSED`, {
                 meta: {
                     port: config.port,
                     serverUrl: config.serverUrl
