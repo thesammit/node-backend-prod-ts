@@ -1,8 +1,8 @@
 // @ts-check
 
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import eslintConfigPrettier from 'eslint-config-prettier';
+import eslint from '@eslint/js'
+import tseslint from 'typescript-eslint'
+import eslintConfigPrettier from 'eslint-config-prettier'
 
 export default tseslint.config({
     languageOptions: {
@@ -10,17 +10,13 @@ export default tseslint.config({
         sourceType: 'module',
         parserOptions: {
             project: true,
-            tsconfigRootDir: import.meta.dirname,
-        },
+            tsconfigRootDir: import.meta.dirname
+        }
     },
     files: ['src/**/*.ts'],
-    extends: [
-        eslint.configs.recommended,
-        ...tseslint.configs.recommendedTypeChecked,
-        eslintConfigPrettier,
-    ],
+    extends: [eslint.configs.recommended, ...tseslint.configs.recommendedTypeChecked, eslintConfigPrettier],
     rules: {
         'no-console': 'error',
-        quotes: ['error', 'single', { allowTemplateLiterals: true }],
-    },
-});
+        quotes: ['error', 'single', { allowTemplateLiterals: true }]
+    }
+})
