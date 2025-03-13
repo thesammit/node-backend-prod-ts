@@ -4,6 +4,10 @@ import util from 'util';
 import path from 'path';
 import config from '../config/config';
 import { EApplicationEnvironment } from '../constant/application';
+import * as sourceMapSupport from 'source-map-support';
+
+// Enable source map support
+sourceMapSupport.install();
 
 const customConsoleFormat = format.printf(({ level, message, timestamp, meta = {} }) => {
     const customMeta = util.inspect(meta, { showHidden: false, depth: null });
