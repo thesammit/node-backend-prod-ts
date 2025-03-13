@@ -5,13 +5,28 @@ import path from 'path';
 import config from '../config/config';
 import { EApplicationEnvironment } from '../constant/application';
 import * as sourceMapSupport from 'source-map-support';
+import { blue, gray, green, magenta, red, yellow } from 'colorette';
 
 // Enable source map support
 sourceMapSupport.install();
 
+const colorizeLogLevel = (level: string): string => {
+    switch (level) {
+        case 'INFO':
+            return blue(level);
+        case 'WARN':
+            return yellow(level);
+        case 'ERROR':
+            return red(level);
+        default:
+            return level;
+    }
+};
+
 const customConsoleFormat = format.printf(({ level, message, timestamp, meta = {} }) => {
-    const customMeta = util.inspect(meta, { showHidden: false, depth: null });
-    return `${timestamp as string} [${level.toUpperCase()}]: ${message as string}\n${timestamp as string} [META]: ${customMeta}`;
+    const customMeta = util.inspect(meta, { showHidden: false, depth: null, colors: true });
+    const customTimeTimestamp = green(timestamp as string);
+    return `${customTimeTimestamp} [${colorizeLogLevel(level.toUpperCase())}]: ${gray(message as string)}\n${customTimeTimestamp} [${magenta('META')}]: ${customMeta}`;
 });
 
 const consoleTransport = (): Array<ConsoleTransportInstance> => {
