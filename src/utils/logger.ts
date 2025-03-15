@@ -1,11 +1,14 @@
-import { createLogger, format, transports } from 'winston';
-import { ConsoleTransportInstance, FileTransportInstance } from 'winston/lib/winston/transports';
-import util from 'util';
+import { blue, gray, green, magenta, red, yellow } from 'colorette';
 import path from 'path';
+import * as sourceMapSupport from 'source-map-support';
+import util from 'util';
+import { createLogger, format, transports } from 'winston';
+import 'winston-mongodb';
+import { ConsoleTransportInstance, FileTransportInstance } from 'winston/lib/winston/transports';
 import config from '../config/config';
 import { EApplicationEnvironment } from '../constant/application';
-import * as sourceMapSupport from 'source-map-support';
-import { blue, gray, green, magenta, red, yellow } from 'colorette';
+import { MongoDBTransportInstance } from 'winston-mongodb';
+import { getAtlasURIWithDb } from './database-url-formatter';
 
 // Enable source map support
 sourceMapSupport.install();
@@ -83,9 +86,22 @@ const fileTransport = (): Array<FileTransportInstance> => {
     return [];
 };
 
+const mongodbTransport = (): Array<MongoDBTransportInstance> => {
+    const dbUrl = getAtlasURIWithDb(config);
+    return [
+        new transports.MongoDB({
+            collection: 'application-logs',
+            level: 'info',
+            db: dbUrl,
+            metaKey: 'meta',
+            expireAfterSeconds: 60 * 60 * 24 * 15 // 15 days
+        })
+    ];
+};
+
 export default createLogger({
     defaultMeta: {
         meta: {}
     },
-    transports: [...consoleTransport(), ...fileTransport()]
+    transports: [...consoleTransport(), ...mongodbTransport(), ...fileTransport()]
 });
