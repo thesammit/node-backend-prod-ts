@@ -11,6 +11,6 @@ export const getDatabaseUrl = (config: TConfig, isWithDbName: boolean = false) =
     return `${db.urlPrefix}${db.url}/${db.name}${db.urlSuffix}`;
 };
 
-export const getAtlasURIWithDb = (config: TConfig) => {
+export const getDatabaseURIWithDbName = (config: TConfig) => {
     return getDatabaseUrl(config, true);
 };

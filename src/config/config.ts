@@ -21,7 +21,9 @@ const config = {
         name: env.DB_NAME,
         user: env.DB_USER,
         password: env.DB_PASSWORD
-    }
+    },
+    migrateMongoURI: env.MIGRATE_MONGO_URI,
+    migrateMongoAutoSync: env.MIGRATE_MONGO_AUTO_SYNC === 'true'
 };
 
 export default config;

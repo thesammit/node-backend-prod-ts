@@ -8,7 +8,7 @@ import { ConsoleTransportInstance, FileTransportInstance } from 'winston/lib/win
 import config from '../config/config';
 import { EApplicationEnvironment } from '../constant/application';
 import { MongoDBTransportInstance } from 'winston-mongodb';
-import { getAtlasURIWithDb } from './database-url-formatter';
+import { getDatabaseURIWithDbName } from './database-url-formatter';
 
 // Enable source map support
 sourceMapSupport.install();
@@ -87,7 +87,7 @@ const fileTransport = (): Array<FileTransportInstance> => {
 };
 
 const mongodbTransport = (): Array<MongoDBTransportInstance> => {
-    const dbUrl = getAtlasURIWithDb(config);
+    const dbUrl = getDatabaseURIWithDbName(config);
     return [
         new transports.MongoDB({
             collection: 'application-logs',
