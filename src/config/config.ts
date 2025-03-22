@@ -23,7 +23,8 @@ const config = {
         password: env.DB_PASSWORD
     },
     migrateMongoURI: env.MIGRATE_MONGO_URI,
-    migrateMongoAutoSync: env.MIGRATE_MONGO_AUTO_SYNC === 'true'
+    migrateMongoAutoSync: env.MIGRATE_MONGO_AUTO_SYNC === 'true',
+    corsOrigin: env.CORS_ORIGIN
 };
 
 export default config;
