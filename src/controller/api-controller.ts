@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import httpResponse from '../utils/http-response';
 import { SUCCESS_MESSAGE } from '../constant/response-message';
 import httpError from '../utils/http-error';
-import { getApplicationHealth, getSystemHealth } from '../utils/frequent';
+import { getApplicationHealth, getSystemHealth } from '../utils/server-health';
 
 export default {
     self: (req: Request, res: Response, next: NextFunction) => {
