@@ -28,8 +28,13 @@ export default {
                 }
             });
         } catch (err) {
-            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-            throw new Error(`Error disconnecting from database: ${err}`);
+            logger.error(`DATABASE_DISCONNECTION`, {
+                meta: {
+                    port: config.port,
+                    serverUrl: config.serverUrl,
+                    err
+                }
+            });
         }
     }
 };

@@ -5,12 +5,13 @@ import databaseService from './service/database-service';
 import { initRateLimiter } from './config/rate-limiter';
 
 const server = app.listen(config.port);
+let connection = null;
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async () => {
     try {
         //database connection
-        const connection = await databaseService.connect();
+        connection = await databaseService.connect();
 
         logger.info(`DATABASE_CONNECTED`, {
             meta: {
@@ -38,6 +39,10 @@ const server = app.listen(config.port);
                 error
             }
         });
+
+        if (connection) {
+            await databaseService.disconnect(connection);
+        }
 
         server.close(() => {
             logger.info(`SERVER_CLOSED`, {
